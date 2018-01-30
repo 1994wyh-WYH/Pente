@@ -14,8 +14,17 @@ public class Game {
 		System.out.println("The initial board is:\n" +board);
 		
 		while(!board.gameOver()) {
-			MyCoordinate playerCoord=(MyCoordinate)player.getMove(board);
-			board.placeStone(player.getStone(), (Coordinate)playerCoord);
+			MyCoordinate playerCoord=new MyCoordinate(0,0);
+			while(true) {
+				try {
+					playerCoord=(MyCoordinate)player.getMove(board);
+					break;
+				}
+				catch(IllegalArgumentException e) {
+					System.out.println("Error: invalid move! Please try again!");
+				}
+			}
+			board.placeStone(player.getStone(), playerCoord);
 			System.out.println("After your move, the board is:\n"+ board);
 			System.out.println("Your captures: "+board.getRedCaptures());
 			if(board.gameOver()) {

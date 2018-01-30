@@ -19,7 +19,6 @@ public class HumanPlayer implements Player{
 	
 	@Override
 	public Coordinate getMove(Board b) {
-		//System.out.println(b.getMoveNumber());
 		System.out.println("Please enter the x and y coordinates of the location that you wish to place your piece:");
 		
 		int row=in.nextInt();
@@ -27,24 +26,20 @@ public class HumanPlayer implements Player{
 		//in.close();
 		
 		if(b.getMoveNumber()==0 && (row!=9 || column!=9)) {
-			System.out.println("Error: invalid move! Should place at the center!");
-			return getMove(b);
+			throw new IllegalArgumentException();
 		}
 		
 		if((b.getMoveNumber()==2) && (Math.abs(row-9)<=2 || Math.abs(column-9)<=2)) 
 		{
-			System.out.println(b.getMoveNumber());
-			System.out.println("Error: invalid move! Should not place within 3 intersections of the center!");
-			return getMove(b);
+			throw new IllegalArgumentException();
 		}
+		
 		MyCoordinate ret=new MyCoordinate(row, column);
 		if(b.isOutOfBounds(ret)) {
-			System.out.println("Error: invalid move! Out of bound!");
-			return getMove(b);
+			throw new IllegalArgumentException();
 		}
 		else if(b.pieceAt(ret)!=Stone.EMPTY) {
-			System.out.println("Error: invalid move! Already taken!");
-			return getMove(b);
+			throw new IllegalArgumentException();
 		}
 		return ret;
 	}

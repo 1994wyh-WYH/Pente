@@ -1,6 +1,7 @@
 package Pente;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This class implements the Player class, representing an auto computer player.
@@ -20,7 +21,7 @@ public class yihanwPlayer implements Player{
 		
 		for(int i=0;i<19;i++) {
 			for(int j=0;j<19;j++) {
-				if(!b.isEmpty((Coordinate)new MyCoordinate(i,j))){
+				if(!b.isEmpty(new MyCoordinate(i,j))){
 					continue;
 				}
 				int score=getScore(b, new MyCoordinate(i,j), stone);
@@ -30,10 +31,15 @@ public class yihanwPlayer implements Player{
 				}
 			}
 		}
-		while((!b.isOutOfBounds(move)) && (!b.isEmpty(move))){
-			move=new MyCoordinate(move.getRow(),move.getColumn()+1);
+		Random rand=new Random();
+		int z=1;
+		while(b.isOutOfBounds(move) || !b.isEmpty(move)){
+			int x=rand.nextInt(19);
+			int y=rand.nextInt(19);
+			move=new MyCoordinate(move.getRow()+x*z,move.getColumn()+y*z);
+			z=-1;
 		}
-		return (Coordinate)move;	
+		return move;	
 	}
 	
 	@Override
@@ -151,7 +157,7 @@ public class yihanwPlayer implements Player{
 			score+=90;
 		}
 		if((countOp>=3&&deadOp==0)||(countOp>=4&&deadOp==1)) {
-			score+=50;
+			score+=80;
 		}
 		if((count==4&&deadEnd==1)||(count==3&&deadEnd==0)){
 			score+=40;
@@ -215,8 +221,8 @@ public class yihanwPlayer implements Player{
 		if(count==4&&deadEnd==0) {
 			score+=90;
 		}
-		if(countOp>=3&&deadOp==0) {
-			score+=50;
+		if((countOp>=3&&deadOp==0)||(countOp>=4&&deadOp==1)) {
+			score+=80;
 		}
 		if((count==4&&deadEnd==1)||(count==3&&deadEnd==0)){
 			score+=40;
@@ -273,8 +279,8 @@ public class yihanwPlayer implements Player{
 		if(count==4&&deadEnd==0) {
 			score+=90;
 		}
-		if(countOp>=3&&deadOp==0) {
-			score+=50;
+		if((countOp>=3&&deadOp==0)||(countOp>=4&&deadOp==1)) {
+			score+=80;
 		}
 		if((count==4&&deadEnd==1)||(count==3&&deadEnd==0)){
 			score+=40;
@@ -330,8 +336,8 @@ public class yihanwPlayer implements Player{
 		if(count==4&&deadEnd==0) {
 			score+=90;
 		}
-		if(countOp>=3&&deadOp==0) {
-			score+=50;
+		if((countOp>=3&&deadOp==0)||(countOp>=4&&deadOp==1)) {
+			score+=80;
 		}
 		if((count==4&&deadEnd==1)||(count==3&&deadEnd==0)){
 			score+=40;

@@ -602,7 +602,7 @@ public class MyBoard implements Board{
 	
 	@Override
 	public boolean gameOver() {
-		if(getRedCaptures()>=2||getYellowCaptures()>=2||fivePieces!=Stone.EMPTY||getMoveNumber()>=19*19) {
+		if(getRedCaptures()>=5||getYellowCaptures()>=5||fivePieces!=Stone.EMPTY||getMoveNumber()>=19*19) {
 			return true;
 		}
 		return false;
@@ -610,10 +610,10 @@ public class MyBoard implements Board{
 	
 	@Override
 	public Stone getWinner() {
-		if(getYellowCaptures()>=2||fivePieces==Stone.YELLOW) {
+		if(getYellowCaptures()>=5||fivePieces==Stone.YELLOW) {
 			return Stone.YELLOW;
 		}
-		else if(getYellowCaptures()>=2||fivePieces==Stone.RED) {
+		else if(getRedCaptures()>=5||fivePieces==Stone.RED) {
 			return Stone.RED;
 		}
 		else {
